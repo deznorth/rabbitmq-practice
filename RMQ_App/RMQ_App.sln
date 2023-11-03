@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34221.43
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMQ_App", "RMQ_App.csproj", "{FC666DDF-51B9-4CE0-9678-0A782EBC9A8C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC666DDF-51B9-4CE0-9678-0A782EBC9A8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC666DDF-51B9-4CE0-9678-0A782EBC9A8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC666DDF-51B9-4CE0-9678-0A782EBC9A8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC666DDF-51B9-4CE0-9678-0A782EBC9A8C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E4DF20B7-7D77-4EFA-8124-9154EA4DF1E7}
+	EndGlobalSection
+EndGlobal
