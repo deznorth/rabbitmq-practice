@@ -30,3 +30,5 @@ E:\Local_Repos\_Practice_Repos\rabbitmq-practice\RMQ_App\obj\Debug\net6.0\refint
 E:\Local_Repos\_Practice_Repos\rabbitmq-practice\RMQ_App\obj\Debug\net6.0\RMQ_App.pdb
 E:\Local_Repos\_Practice_Repos\rabbitmq-practice\RMQ_App\obj\Debug\net6.0\RMQ_App.genruntimeconfig.cache
 E:\Local_Repos\_Practice_Repos\rabbitmq-practice\RMQ_App\obj\Debug\net6.0\ref\RMQ_App.dll
+E:\Local_Repos\_Practice_Repos\rabbitmq-practice\RMQ_App\bin\Debug\net6.0\RabbitMQ.Client.dll
+E:\Local_Repos\_Practice_Repos\rabbitmq-practice\RMQ_App\bin\Debug\net6.0\System.Threading.Channels.dll

@@ -31,8 +31,7 @@ namespace RMQ_Worker
                 var message = Encoding.UTF8.GetString(body);
                 Console.WriteLine($" [x] Received {message}");
 
-                int dots = message.Split('.').Length - 1;
-                Thread.Sleep(dots * 1000);
+                Thread.Sleep(10 * 1000);
 
                 Console.WriteLine(" [x] Done");
 
