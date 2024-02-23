@@ -1,9 +1,10 @@
 ﻿using System.Text;
+using System.Text.Json;
 using RabbitMQ.Client;
 
-namespace RMQ_App
+namespace RMQ_App.Messaging
 {
-    public class RabbitClient
+    public class RabbitClient : IMessagingClient
     {
         private readonly ILogger<RabbitClient> _logger;
         private readonly IModel _rabbitChannel;
@@ -40,6 +41,24 @@ namespace RMQ_App
             );
 
             _logger.LogInformation("Sent message: {message}", message);
+        }
+
+        public void SendMessage<T>(T payload)
+        {
+            var jsonString = JsonSerializer.Serialize(payload);
+            var body = Encoding.UTF8.GetBytes(jsonString);
+
+            var properties = _rabbitChannel.CreateBasicProperties();
+            properties.Persistent = true;
+
+            _rabbitChannel.BasicPublish(
+                exchange: string.Empty,
+                routingKey: "task_queue",
+                basicProperties: properties,
+                body: body
+            );
+
+            _logger.LogInformation("Sent message: {message}", jsonString);
         }
     }
 }

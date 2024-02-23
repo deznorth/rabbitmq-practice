@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using RMQ_App.Messaging;
+using RMQ_App.Models;
 
 namespace RMQ_App.Controllers
 {
@@ -7,19 +9,28 @@ namespace RMQ_App.Controllers
     public class MessagingController : ControllerBase
     {
         private readonly ILogger<MessagingController> _logger;
-        private readonly RabbitClient _rabbitClient;
+        private readonly IMessagingClient _rabbitClient;
 
-        public MessagingController(ILogger<MessagingController> logger, RabbitClient rabbitClient)
+        public MessagingController(ILogger<MessagingController> logger, IMessagingClient rabbitClient)
         {
             _logger = logger;
             _rabbitClient = rabbitClient;
         }
 
-        [HttpGet()]
-        public IActionResult Get([FromQuery] string message)
+        [HttpPost("export")]
+        public IActionResult RequestExport([FromBody] ExportRequest request)
         {
-            _rabbitClient.SendMessage(message);
-            return Ok("Hello, World!");
+            var exportTask = new ExportTask(request.FileName, request.FileId);
+            _rabbitClient.SendMessage(exportTask);
+            return Ok(exportTask);
+        }
+
+        [HttpPost("upvotes")]
+        public IActionResult RequestUpvotes([FromBody] UpvotesRequest request)
+        {
+            var upvotesTask = new UpvotesTask(request.PostId, request.NumOfVotes);
+            _rabbitClient.SendMessage(upvotesTask);
+            return Ok(upvotesTask);
         }
     }
 }

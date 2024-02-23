@@ -1,6 +1,9 @@
 ﻿using System.Text;
+using System.Text.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using Newtonsoft.Json;
+using RMQ_App.Models;
 
 namespace RMQ_Worker
 {
@@ -28,10 +31,16 @@ namespace RMQ_Worker
             consumer.Received += (model, ea) =>
             {
                 byte[] body = ea.Body.ToArray();
-                var message = Encoding.UTF8.GetString(body);
-                Console.WriteLine($" [x] Received {message}");
+                var jsonString = Encoding.UTF8.GetString(body);
+                var task = JsonConvert.DeserializeObject<UpvotesTask>(jsonString);
+                Console.WriteLine($" [x] Received upvotes request. Giving {task?.NumOfVotes} votes to postId: {task?.PostId}.");
 
-                Thread.Sleep(10 * 1000);
+
+                for(int i = 0; i < task?.NumOfVotes; i++)
+                {
+                    Thread.Sleep(500);
+                    Console.WriteLine($"[postId: {task?.PostId}] votes completed: {i}");
+                }
 
                 Console.WriteLine(" [x] Done");
 

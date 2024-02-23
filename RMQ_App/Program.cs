@@ -1,3 +1,7 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using RMQ_App.Messaging;
+
 namespace RMQ_App
 {
     public class Program
@@ -5,6 +9,8 @@ namespace RMQ_App
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+            builder.Host.ConfigureContainer<ContainerBuilder>(builder => ConfigureServices(builder));
 
             // Add services to the container.
 
@@ -12,7 +18,6 @@ namespace RMQ_App
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddSingleton<RabbitClient>();
 
             var app = builder.Build();
 
@@ -30,6 +35,11 @@ namespace RMQ_App
             app.MapControllers();
 
             app.Run();
+        }
+
+        public static void ConfigureServices(ContainerBuilder builder)
+        {
+            builder.RegisterType<RabbitClient>().AsImplementedInterfaces().SingleInstance();
         }
     }
 }
