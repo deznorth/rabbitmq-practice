@@ -1,0 +1,24 @@
+version: '3.4'
+
+services:
+  rmq_app:
+    image: ${DOCKER_REGISTRY-}rmqapp
+    container_name: "rmq_app"
+    build:
+      context: .
+      dockerfile: src/RMQ_App/Dockerfile
+
+  rmq_worker:
+    image: ${DOCKER_REGISTRY-}rmqworker
+    container_name: "rmq_worker"
+    build:
+      context: .
+      dockerfile: src/RMQ_Worker/Dockerfile
+
+  rabbitmq:
+    image: "rabbitmq:3-management-alpine"
+    container_name: "rabbitmq"
+    ports:
+      - 5672:5672
+      - 15672:15672
+

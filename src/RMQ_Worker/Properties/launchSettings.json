@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "RMQ_Worker": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
